@@ -1,0 +1,31 @@
+<p>create-new-user works!</p>
+<form ngModel="ngForm" #test="ngForm">
+
+  <input
+    type="text"
+    name="name"
+    #nameInput="ngModel"
+    ngModel
+  >
+  <input
+    type="text"
+    name="email"
+    #emailInput="ngModel"
+    ngModel
+  >
+
+</form>
+<p *ngIf="submitted">
+  email: {{ test.value.email }} <br/>
+  name: {{ test.value.name }}
+</p>
+
+<button
+  type="button"
+  (click)="
+    createNewUser({name: nameInput.value, email: emailInput.value, id: emailInput.value});
+    submitted = true;
+  "
+>
+  Create new user
+</button>

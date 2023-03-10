@@ -1,0 +1,24 @@
+
+
+nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100px;
+
+  display: flex;
+
+  background: aquamarine;
+}
+
+.nav-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  &:hover {
+    background: darken(aquamarine, 15%);
+    cursor: pointer;
+  }
+}
