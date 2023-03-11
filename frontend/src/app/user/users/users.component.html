@@ -1,0 +1,29 @@
+<h1>users.component.html</h1>
+<ul *ngFor="let user of users">
+  <li>
+    id: {{user.id}} <br/>
+    firstName: {{user.firstName}} <br/>
+    lastName: {{user.lastName}} <br/>
+    email: {{user.email}}
+  </li>
+</ul>
+<hr/>
+<h2>Add new user</h2>
+<input
+  type="text"
+  [(ngModel)]="name"
+>
+<br/>
+<button
+  (click)="saveUser()"
+>
+  click here to go to add user with name: {{name}}
+</button>
+<hr/>
+<h2>child navigation</h2>
+<ul>
+  <li routerLink="users" [queryParams]="{email: 'John@gmail.com', name: 'John'}">john</li>
+  <li routerLink="users" [queryParams]="{email: 'bob@gmail.com', name: 'bob'}">bob</li>
+</ul>
+<router-outlet>
+</router-outlet>

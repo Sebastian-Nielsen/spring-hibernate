@@ -1,11 +1,15 @@
 package com.example.springmew;
 
+import com.example.springmew.user.User;
+import com.example.springmew.user.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLIntegrityConstraintViolationException {
 		// Create Hibernate configuration object
 		Configuration config = new Configuration().configure();
 
@@ -17,44 +21,49 @@ public class Main {
 
 
 		User user = new User();
-		user.setName("John");
-		user.setId(1);
+		user.setFirstName("John");
+		user.setId(1L);
+
 		User user2 = new User();
-		user.setName("sebastian");
-		user.setId(2);
+		user2.setFirstName("Sebastian");
+		user2.setId(2L);
+
 		User user3 = new User();
-		user.setName("Bob");
-		user.setId(3);
+		user3.setFirstName("Bob");
+		user3.setId(3L);
 
-		System.out.println(user);
-		System.out.println(user2);
-		System.out.println(user3);
-		System.out.println("----------");
-		System.out.println(user);
-		System.out.println(user2);
-		System.out.println(user3);
-		System.out.println("----------");
-		System.out.println(user);
-		System.out.println(user2);
-		System.out.println(user3);
-		System.out.println("----------");
-		System.out.println(user);
-		System.out.println(user2);
-		System.out.println(user3);
-		System.out.println("----------");
-		System.out.println(user);
-		System.out.println(user2);
-		System.out.println(user3);
-		System.out.println("----------");
 
-		session.beginTransaction();
-//		session.save(user);
-//		session.save(user2);
-//		session.save(user3);
-		session.getTransaction().commit();
+		UserRepository userRepository = new UserRepository();
+		userRepository.save(user);
+		userRepository.save(user2);
+		userRepository.save(user3);
+
+//		session.persist(user);
+//		session.persist(user2);
+//		session.persist(user3);
+//		config = new Configuration().configure();
+//		sessionFactory = config.buildSessionFactory();
+//		config = new Configuration().configure();
+//		sessionFactory = config.buildSessionFactory();
 //
-//		 Close the Hibernate session
-		session.close();
+//
+//		session = sessionFactory.openSession();
+//		session.beginTransaction();
+//		session.save(user);
+//		session.getTransaction().commit();
+//		session.close();
+//
+//		session = sessionFactory.openSession();
+//		session.beginTransaction();
+//		session.save(user2);
+//		session.getTransaction().commit();
+//		session.close();
+//
+//		session = sessionFactory.openSession();
+//		session.beginTransaction();
+//		session.save(user3);
+//		session.getTransaction().commit();
+//		session.close();
 	}
 //	public static void main(String[] args) {
 //		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate.tutorial.jpa");
@@ -77,3 +86,4 @@ public class Main {
 //
 //	}
 }
+//

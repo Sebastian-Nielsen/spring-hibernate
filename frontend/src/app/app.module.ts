@@ -8,19 +8,23 @@ import {UserModule} from "./user/user.module";
 import {AuthComponent} from "./auth/auth.component";
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
+import { RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
+    NavbarComponent,
     AppComponent,
     AuthComponent,
-    NavbarComponent,
     HomeComponent,
+    PageNotFoundComponent,
   ],
   imports: [
+    RouterModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    UserModule
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

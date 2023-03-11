@@ -10,16 +10,17 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     this.usersUrl = 'http://localhost:8080/users';
-    // this.usersUrl = 'http://localhost:8080/streams';
   }
 
-  public getAll(): Observable<User[]> {
+  public fetchAllUsers(): Observable<User[]> {
     console.log("get /users")
     return this.http.get<User[]>(this.usersUrl);
   }
 
   public save(user: User) {
     console.log("post /users, data:", user)
-    return this.http.post<User>(this.usersUrl, user);
+    return this.http.post<User>(this.usersUrl, user).subscribe(r => {
+      console.log("post /users res:", r)
+    });
   }
 }

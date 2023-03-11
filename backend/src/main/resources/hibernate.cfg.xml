@@ -3,17 +3,20 @@
     "-//Hibernate/Hibernate Configuration DTD//EN"
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-<session-factory>
-  <property nameInput="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-  <property nameInput="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property nameInput="hibernate.connection.url">
-    jdbc:mysql://localhost:3306/sakila?enabledTLSProtocols=TLSv1.2
-  </property>
-<!--  jdbc:mysql://localhost:3306/sakila?enabledTLSProtocols=TLSv3-->
-  <property nameInput="hibernate.connection.username">root</property>
-  <property nameInput="hibernate.connection.password">syh47nbj</property>
-  <property nameInput="hibernate.hbm2ddl.auto">create</property>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">
+      jdbc:mysql://localhost:3306/sakila?enabledTLSProtocols=TLSv1.2
+    </property>
+    <!--  jdbc:mysql://localhost:3306/sakila?enabledTLSProtocols=TLSv3-->
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">syh47nbj</property>
+    <!-- 'create' will make hibernate attempt to createa new database schema each time the app starts up -->
+<!--    <property name="hibernate.hbm2ddl.auto">create</property>    -->
+    <!-- 'update' will prevent hibernate from droppingg and recreating the database schema each time the server starts up -->
+    <property name="hibernate.hbm2ddl.auto">update</property>
 
-  <mapping class="com.example.springmew.User"/>
-</session-factory>
+    <mapping class="com.example.springmew.user.User"/>
+  </session-factory>
 </hibernate-configuration>

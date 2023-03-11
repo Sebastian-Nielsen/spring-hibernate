@@ -1,99 +1,64 @@
-package com.example.springmew.Controller;
+package com.example.springmew.user;
 
-import com.example.springmew.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/users")
 public class UsersController {
 
-	@DeleteMapping("/{id}")
-	public String delete(@PathVariable("id") Long userId) {
-		UserService.delete(userId);
-		return "it's working";
-	}
+//
+//	@DeleteMapping("/{id}")
+//	public String delete(@PathVariable("id") Long userId) {
+//		UserService.delete(userId);
+//		return "it's working";
+//	}
+//
+	UserRepository userRepository = new UserRepository();
 
-	// GET localhost:8080/users
-	@GetMapping
-	public Map<String, Object> get() {
-//		doHibernateStuff();
 
-		Map map = new HashMap<>();
-		map.put("key1", "workin!!!!!!!!");
-		return map;
+	@GetMapping   // GET localhost:8080/users:id
+	public List<User> get(@RequestParam(required = false) Long id) {
+		if (id != null) {
+			return List.of(userRepository.findById(id));
+		} {
+			return userRepository.findAll();
+		}
 	}
 
 	@PostMapping
-	public Map<String, Object> post(@RequestBody User o) {
-		Configuration config = new Configuration().configure();
+	public Map<String, Object> post(@RequestBody IdModel id) {
+		User user;
+		if (id.id() == null) {
+			user = new User();
+			user.setFirstName("no-id");
+			user.setId(id.id());
+			user.setEmail("no-id@mail");
+		} else {
+			System.out.println("requestBody: " + id);
+			System.out.println("requestBody: " + id);
+			System.out.println("requestBody: " + id);
+			System.out.println("something: " + id.something());
+			System.out.println("id: " + id.id());
+			user = new User();
+			user.setFirstName(id.id().toString());
+			user.setEmail("john" + id.id() + "@gmail.com");
+			user.setId(id.id());
+		}
 
-		// Create Hibernate session factory object
-		SessionFactory sessionFactory = config.buildSessionFactory();
+		userRepository.save(user);
 
-		Session session = sessionFactory.openSession();
-
-		User user = new User();
-		user.setName("John");
-		user.setEmail("john@mail");
-		user.setId(1);
-		User user2 = new User();
-		user2.setName("sebastian");
-		user2.setEmail("sebastian@mail");
-		user2.setId(2);
-
-		session.beginTransaction();
-		session.save(user);
-		session.save(user2);
-		session.getTransaction().commit();
-
-		session.close();
-
-		System.out.println("post");
-		System.out.println("post");
-		System.out.println("post");
-		System.out.println("post");
-		System.out.println("post");
-		System.out.println(o);
-		System.out.println(o.getId());
-		System.out.println(o.getName());
-		System.out.println(o.getEmail());
-		System.out.println(o);
-		System.out.println(o);
-		System.out.println("post");
-		System.out.println("post");
 
 		Map map = new HashMap<>();
+		map.put("working", "working");
 		return map;
-
-	}
-
-	private void doHibernateStuff() {
-		Configuration config = new Configuration().configure();
-
-		// Create Hibernate session factory object
-		SessionFactory sessionFactory = config.buildSessionFactory();
-
-		Session session = sessionFactory.openSession();
-
-		User user = new User();
-		user.setName("John");
-		user.setId(1);
-		User user2 = new User();
-		user2.setName("sebastian");
-		user2.setId(2);
-
-		session.beginTransaction();
-//		session.save(user);
-//		session.save(user2);
-		session.getTransaction().commit();
-
-		session.close();
 	}
 }

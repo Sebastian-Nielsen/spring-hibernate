@@ -1,8 +1,27 @@
-<nav>
-  <div class="nav-option" routerLink="/">
-    home
-  </div>
-  <div class="nav-option" [routerLink]="['/users']">
-    list users
-  </div>
-</nav>
+<div>
+  <h1>navbar.component.html</h1>
+  <nav>
+    <div
+      class="nav-option"
+      routerLink="/"
+    >
+      <!--    [routerLinkActiveOptions]="{exact: true}"-->
+      home
+    </div>
+    <div
+      class="nav-option"
+      routerLink="/users"
+    >
+<!--      routerLink="/users"-->
+      list users
+    </div>
+    <div
+      class="nav-option"
+      routerLink="/test"
+    >
+<!--    <div routerLink="/test">-->
+      test
+    </div>
+  </nav>
+
+</div>
